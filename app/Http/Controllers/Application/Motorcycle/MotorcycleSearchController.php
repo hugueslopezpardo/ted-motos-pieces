@@ -22,40 +22,35 @@ class MotorcycleSearchController extends Controller
      */
     public function index(Request $request, $category = null, $type = null)
     {
-        $query = MotorcyclePart::query();
+        // Start querying the MotorcyclePart model with eager loading for type and category
+        $query = MotorcyclePart::with(['type', 'type.category', 'quality']);
 
-        // Optional filter by type
-        if ($type) {
-            $query->whereHas('type', function ($query) use ($type) {
-                $query->where('slug', $type);
-            });
-        }
-
-        // Optional filter by category (type.category)
+        // Apply filtering by category if provided
         if ($category) {
-            $query->whereHas('type', function ($query) use ($category) {
-                $query->whereHas('category', function ($query) use ($category) {
-                    $query->where('slug', $category);
-                });
+            $query->whereHas('type.category', function ($q) use ($category) {
+                $q->where('slug', $category);
             });
         }
 
-        $query->where('is_sold_out', false);
-        $query->where('is_active', true);
-
-        // Get the parts, eager loading relationships
-        $parts = $query->with(['type', 'type.category', 'quality'])->get();
-
-
-        foreach ($parts as $part) {
-            $part->image = $part->getFullImagesPathAttribute();
+        // Apply filtering by type if provided
+        if ($type) {
+            $query->whereHas('type', function ($q) use ($type) {
+                $q->where('slug', $type);
+            });
         }
+
+        // Retrieve the filtered motorcycle parts
+        $parts = $query->get()->map(function ($part) {
+            $part->image = $part->getFullImagesPathAttribute();
+            return $part;
+        });
 
         return Inertia::render('Application/MotorcyclePartSearch/Index', [
             'motorcycleParts' => $parts,
             'categories' => MotorcyclePartCategory::all(),
             'types' => MotorcyclePartType::all(),
         ]);
+
     }
 
 

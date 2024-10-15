@@ -8,8 +8,10 @@ import {
 import { Link, usePage } from "@inertiajs/react";
 import {FunnelIcon, MinusIcon, PlusIcon} from "@heroicons/react/20/solid";
 
-const MotorcyclePartPage = ({ auth, motorcycleParts }: PageProps<{ motorcycleParts: any, categories: any, types: any }>) => {
+const MotorcyclePartPage = ({ auth }: PageProps<{ motorcycleParts: any, categories: any, types: any }>) => {
+
     const { props }: any = usePage();
+
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState<any>(false);
     const [filteredParts, setFilteredParts] = useState<any>(props.motorcycleParts);
     const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
@@ -21,6 +23,7 @@ const MotorcyclePartPage = ({ auth, motorcycleParts }: PageProps<{ motorcyclePar
         { name: 'Prix croissant', current: false },
         { name: 'Prix décroissant', current: false },
     ];
+
 
     // Get all qualities, categories (type.category), and types
     const qualities = props.motorcycleParts.map((part: any) => part.quality.name)
@@ -110,7 +113,6 @@ const MotorcyclePartPage = ({ auth, motorcycleParts }: PageProps<{ motorcyclePar
 
         setFilteredParts(filtered);
     }, [categoryFilters, typeFilters, qualityFilters, props.motorcycleParts]);
-
 
     return (
         <ApplicationLayout auth={auth} title={"Pièces"}>
