@@ -139,7 +139,6 @@ const navigation = {
                             { name: 'Silencieux', href: route('motorcycles.search', { category: 'systeme-d-echappement', subcategory: 'silencieux' }) },
                             { name: 'Collecteurs', href: route('motorcycles.search', { category: 'systeme-d-echappement', subcategory: 'collecteurs' }) },
                             { name: 'Catalyseurs', href: route('motorcycles.search', { category: 'systeme-d-echappement', subcategory: 'catalyseurs' }) },
-                            { name: 'Tuyaux d\'échappement', href: route('motorcycles.search', { category: 'systeme-d-echappement', subcategory: 'tuyaux-d-echappement' }) },
                             { name: 'Tout voir', href: route('motorcycles.search', { category: 'systeme-d-echappement' }) },
                         ],
                     },

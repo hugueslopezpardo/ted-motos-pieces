@@ -71,6 +71,12 @@ class MotorcyclePartTypeResource extends Resource
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Catégorie')
                     ->sortable(),
+
+                Tables\Columns\TextColumn::make('parts_count')
+                    ->label('Nombre de pièces')
+                    ->counts('parts') // Use counts to count the related parts
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Créé le')
                     ->dateTime()

@@ -49,4 +49,10 @@ class MotorcyclePartType extends Model
     {
         return $this->belongsTo(MotorcyclePartCategory::class, 'motorcycle_part_category_id');
     }
+
+    public function parts()
+    {
+        return $this->hasMany(MotorcyclePart::class);
+    }
+
 }
