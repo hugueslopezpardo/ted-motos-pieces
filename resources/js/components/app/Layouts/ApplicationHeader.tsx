@@ -23,6 +23,7 @@ import {Link, useForm} from "@inertiajs/react";
 function classNames(...classes: (string | boolean | null | undefined)[]) {
     return classes.filter(Boolean).join(' ')
 }
+// @ts-ignore
 
 const navigation = {
     categories: [
