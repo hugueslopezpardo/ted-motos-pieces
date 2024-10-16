@@ -65,7 +65,7 @@ const navigation = {
                             { name: 'Shifter', href: route('motorcycles.search', { category: 'mecanique', subcategory: 'shifter' }) },
                             { name: 'Moteur', href: route('motorcycles.search', { category: 'mecanique', subcategory: 'moteur' }) },
                             { name: 'Suspension', href: route('motorcycles.search', { category: 'mecanique', subcategory: 'suspension' }) },
-                            { name: 'Carrosserie', href: route('motorcycles.search', { category: 'mecanique', subcategory: 'carrosserie' }) },
+                            { name: 'Carénage', href: route('motorcycles.search', { category: 'mecanique', subcategory: 'carenage' }) },
                             { name: 'Tout voir', href: route('motorcycles.search', { category: 'mecanique' }) },
                         ],
                     },
@@ -88,7 +88,7 @@ const navigation = {
                         items: [
                             { name: 'Pompe à Carburant', href: route('motorcycles.search', { category: 'systeme-de-carburant', subcategory: 'pompe-a-carburant' }) },
                             { name: 'Injecteurs', href: route('motorcycles.search', { category: 'systeme-de-carburant', subcategory: 'injecteurs' }) },
-                            { name: 'Réservoir', href: route('motorcycles.search', { category: 'systeme-de-carburant', subcategory: 'reservoir' }) },
+                            { name: 'Réservoir', href: route('motorcycles.search', { category: 'systeme-de-carburant', subcategory: 'reservoir-de-carburant' }) },
                             { name: 'Carburateur', href: route('motorcycles.search', { category: 'systeme-de-carburant', subcategory: 'carburateur' }) },
                             { name: 'Tout voir', href: route('motorcycles.search', { category: 'systeme-de-carburant' }) },
                         ],
