@@ -17,27 +17,33 @@ const AboutSection = () => {
                             </h2>
                             <p className="mt-6 leading-8 text-gray-700 text-justify">
                                 Ted Motos Pièces, basée à Caen, au cœur du Calvados, est une entreprise spécialisée
-                                dans la vente de pièces détachées pour motos de sport et roadsters. Forte d'une
-                                expertise développée au fil des années, Ted Motos Pièces s'impose comme un acteur
+                                dans la vente de pièces détachées d'occasion pour motos de sport et roadsters. Forte
+                                d'une expertise développée au fil des années, Ted Motos Pièces s'impose comme un acteur
                                 incontournable pour les passionnés de deux-roues à la recherche de qualité et de
-                                performance. Que vous soyez un amateur de vitesse ou un professionnel cherchant des
-                                composants spécifiques, l'entreprise propose une large gamme de pièces détachées
-                                répondant aux besoins des motos de sport et roadsters les plus exigeantes. Du
-                                système de freinage aux kits d’embrayage, en passant par les carénages et les
-                                échappements, Ted Motos Pièces offre des produits provenant des plus grands
-                                fabricants mondiaux, garantissant ainsi sécurité et fiabilité à chaque commande.
+                                performance, tout en favorisant une approche économique et durable. Que vous soyez un
+                                amateur
+                                de vitesse ou un professionnel cherchant des composants spécifiques, l'entreprise
+                                propose une large
+                                gamme de pièces d'occasion soigneusement sélectionnées, répondant aux besoins des motos
+                                de sport et roadsters les plus exigeantes. Du système de freinage aux kits d'embrayage,
+                                en passant par les carénages et les échappements, Ted Motos Pièces offre des produits
+                                provenant de sources fiables, garantissant ainsi sécurité et fiabilité à chaque
+                                commande.
                             </p>
                             <p className="mt-6 leading-8 text-gray-700 text-justify">
-                                En choisissant Ted Motos Pièces, les motards bénéficient non seulement d'une
-                                sélection rigoureuse de pièces de qualité, mais aussi d'un service client
-                                exemplaire. Située à Caen, l'entreprise allie proximité et expertise pour répondre
-                                aux demandes les plus complexes. Avec un site de vente en ligne performant et une
-                                équipe dédiée, Ted Motos Pièces assure une livraison rapide dans toute la France,
-                                permettant aux passionnés de motos de remettre rapidement leur véhicule en état ou
-                                de l’améliorer pour des performances optimales. Que ce soit pour des conseils
-                                techniques ou pour trouver une pièce rare, Ted Motos Pièces se distingue par son
-                                engagement à fournir des solutions sur mesure à chaque client, faisant de la
-                                satisfaction client une priorité absolue.
+                                En choisissant Ted Motos Pièces, les motards bénéficient non seulement d'une sélection
+                                rigoureuse de pièces d'occasion de qualité, mais aussi d'un service client exemplaire.
+                                Située à Caen, l'entreprise allie proximité et expertise pour répondre aux demandes les
+                                plus complexes.
+                                Avec un site de vente en ligne performant et une équipe dédiée, Ted Motos Pièces assure
+                                une livraison rapide
+                                dans toute la France, permettant aux passionnés de motos de remettre rapidement leur
+                                véhicule en état ou
+                                de l’améliorer tout en respectant leur budget. Que ce soit pour des conseils techniques
+                                ou pour trouver
+                                une pièce rare, Ted Motos Pièces se distingue par son engagement à fournir des solutions
+                                sur mesure
+                                à chaque client, tout en contribuant à une consommation plus responsable et durable.
                             </p>
                         </div>
                     </div>

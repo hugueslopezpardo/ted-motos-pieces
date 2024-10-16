@@ -22,27 +22,31 @@ class MotorcycleSearchController extends Controller
      */
     public function index(Request $request, $category = null, $type = null)
     {
-        // Start querying the MotorcyclePart model with eager loading for type and category
-        $query = MotorcyclePart::with(['type', 'type.category', 'quality']);
+        // Get input subcategory
+        $subcategory = $request->input('subcategory');
+        $parts = [];
 
-        // Apply filtering by category if provided
-        if ($category) {
-            $query->whereHas('type.category', function ($q) use ($category) {
-                $q->where('slug', $category);
+        if ($subcategory) {
+            $subcategory_id = MotorcyclePartType::where('slug', $subcategory)->first()->id;
+
+            // Get all the motorcycle parts where the motorcycle_part_type_id is equal to the subcategory id
+            $parts = MotorcyclePart::where('motorcycle_part_type_id', $subcategory_id)->with('type', 'type.category', 'quality')->get();
+
+            // Get all the part where type.category.slug is equal to the category
+            $parts = $parts->filter(function ($part) use ($category) {
+                return $part->type->category->slug === $category;
             });
+
+        } else {
+            // Get all the parts where the type.category.slug is equal to the category
+            $parts = MotorcyclePart::whereHas('type.category', function ($query) use ($category) {
+                $query->where('slug', $category);
+            })->with('type', 'type.category', 'quality')->get();
         }
 
-        // Apply filtering by type if provided
-        if ($type) {
-            $query->whereHas('type', function ($q) use ($type) {
-                $q->where('slug', $type);
-            });
-        }
-
-        // Retrieve the filtered motorcycle parts
-        $parts = $query->get()->map(function ($part) {
+        // Add all images to the parts
+        $parts->map(function ($part) {
             $part->image = $part->getFullImagesPathAttribute();
-            return $part;
         });
 
         return Inertia::render('Application/MotorcyclePartSearch/Index', [
