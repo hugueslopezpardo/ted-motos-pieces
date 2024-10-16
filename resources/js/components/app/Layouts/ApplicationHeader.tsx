@@ -110,7 +110,7 @@ const navigation = {
                         id: 'brake-system',
                         name: 'Freinage',
                         items: [
-                            { name: 'Étriers', href: route('motorcycles.search', { category: 'systeme-de-freinage', subcategory: 'etriers' }) },
+                            { name: 'Système de freinage', href: route('motorcycles.search', { category: 'systeme-de-freinage', subcategory: 'systeme-frein' }) },
                             { name: 'Disques', href: route('motorcycles.search', { category: 'systeme-de-freinage', subcategory: 'disques' }) },
                             { name: 'Plaquettes', href: route('motorcycles.search', { category: 'systeme-de-freinage', subcategory: 'plaquettes' }) },
                             { name: 'Câbles de frein', href: route('motorcycles.search', { category: 'systeme-de-freinage', subcategory: 'cables-de-frein' }) },
