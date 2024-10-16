@@ -123,8 +123,8 @@ const navigation = {
                         id: 'cooling-system',
                         name: 'Refroidissement',
                         items: [
-                            { name: 'Radiateurs', href: route('motorcycles.search', { category: 'systeme-de-refroidissement', subcategory: 'radiateurs' }) },
-                            { name: 'Ventilateurs', href: route('motorcycles.search', { category: 'systeme-de-refroidissement', subcategory: 'ventilateurs' }) },
+                            { name: 'Radiateurs', href: route('motorcycles.search', { category: 'systeme-de-refroidissement', subcategory: 'radiateur' }) },
+                            { name: 'Ventilateurs', href: route('motorcycles.search', { category: 'systeme-de-refroidissement', subcategory: 'ventilateur' }) },
                             { name: 'Thermostats', href: route('motorcycles.search', { category: 'systeme-de-refroidissement', subcategory: 'thermostats' }) },
                             { name: 'Pompe à eau', href: route('motorcycles.search', { category: 'systeme-de-refroidissement', subcategory: 'pompe-a-eau' }) },
                             { name: 'Tout voir', href: route('motorcycles.search', { category: 'systeme-de-refroidissement' }) },
@@ -136,7 +136,7 @@ const navigation = {
                         id: 'exhaust-system',
                         name: 'Échappement',
                         items: [
-                            { name: 'Silencieux', href: route('motorcycles.search', { category: 'systeme-d-echappement', subcategory: 'silencieux' }) },
+                            { name: 'Silencieux', href: route('motorcycles.search', { category: 'systeme-d-echappement', subcategory: ' echappement' }) },
                             { name: 'Collecteurs', href: route('motorcycles.search', { category: 'systeme-d-echappement', subcategory: 'collecteurs' }) },
                             { name: 'Catalyseurs', href: route('motorcycles.search', { category: 'systeme-d-echappement', subcategory: 'catalyseurs' }) },
                             { name: 'Tout voir', href: route('motorcycles.search', { category: 'systeme-d-echappement' }) },
