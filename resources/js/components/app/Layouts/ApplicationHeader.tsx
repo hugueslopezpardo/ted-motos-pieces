@@ -1,6 +1,6 @@
 'use client';
 
-import {PageProps, User} from "@/types";
+import {PageProps} from "@/types";
 import {Fragment, useState} from "react";
 import {
     Dialog,
