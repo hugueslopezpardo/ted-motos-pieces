@@ -116,9 +116,7 @@ class InvoiceController extends Controller
             ->currencyDecimalPoint(',')
             ->filename($order->reference)
             ->addItems($items)
-            ->notes( $delivery_service . ', ' . $address . ', ' . $postal_code . ' ' . $city)
-            ->notes('TVA non applicable article 293 B du CGI.')
-            ->notes('Merci de votre confiance')
+            ->notes( $delivery_service . ', ' . $address . ', ' . $postal_code . ' ' . $city . ', TVA non applicable article 293 B du CGI.
             ->logo(public_path('assets/images/shared/logos/logo-transparent.png'));
 
         return $invoice->stream();
