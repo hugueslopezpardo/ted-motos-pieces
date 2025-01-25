@@ -6,6 +6,7 @@ use App\Http\Controllers\Application\Checkout\CheckoutController;
 use App\Http\Controllers\Application\Contact\ContactController;
 use App\Http\Controllers\Application\Invoice\InvoiceController;
 use App\Http\Controllers\Application\Motorcycle\MotorcycleController;
+use App\Http\Controllers\Application\Motorcycle\MotorcyclePartAccessoriesController;
 use App\Http\Controllers\Application\Motorcycle\MotorcyclePartController;
 use App\Http\Controllers\Application\Motorcycle\MotorcyclePartDetailController;
 use App\Http\Controllers\Application\Motorcycle\MotorcycleSearchController;
@@ -44,6 +45,9 @@ Route::prefix('motorcycles')->group(function () {
 
     Route::get('/search/{category?}/{type?}', [MotorcycleSearchController::class, 'index'])
         ->name('motorcycles.search');
+
+    Route::get('/accessories', [MotorcyclePartAccessoriesController::class, 'index'])
+        ->name('motorcycles.accessories');
 
 });
 

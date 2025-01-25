@@ -206,9 +206,9 @@ const WelcomePage = ({auth, trending}: PageProps<{ trending: any[] }>) => {
                             <div className="flex items-end p-6 sm:absolute sm:inset-0">
                                 <div>
                                     <h3 className="font-semibold text-white">
-                                        <Link href={route('motorcycles.search')}>
+                                        <Link href={route('motorcycles.accessories')}>
                                             <span className="absolute inset-0"/>
-                                            Découvrez nos pièces détachées
+                                            Découvrez nos accessoires
                                         </Link>
                                     </h3>
                                     <p aria-hidden="true" className="mt-1 text-sm text-white">

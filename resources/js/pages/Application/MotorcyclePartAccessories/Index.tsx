@@ -8,7 +8,7 @@ import {
 import { Link, usePage } from "@inertiajs/react";
 import {FunnelIcon, MinusIcon, PlusIcon} from "@heroicons/react/20/solid";
 
-const MotorcyclePartPage = ({ auth }: PageProps<{ motorcycleParts: any, categories: any, types: any }>) => {
+const MotorcyclePartAccessoriesPage = ({ auth }: PageProps<{ motorcycleParts: any, categories: any, types: any }>) => {
 
     const { props }: any = usePage();
 
@@ -239,4 +239,4 @@ const MotorcyclePartPage = ({ auth }: PageProps<{ motorcycleParts: any, categori
     );
 };
 
-export default MotorcyclePartPage;
+export default MotorcyclePartAccessoriesPage;
