@@ -39,12 +39,18 @@ class SearchController extends Controller
         // Si une recherche est effectuée
         if ($search_query) {
             // Rechercher les pièces correspondant à la recherche
-            $parts = MotorcyclePart::where('name', 'like', "%$search_query%")
-                ->orWhere('description', 'like', "%$search_query%")
-                ->orWhereHas('motorcycle', function ($query) use ($search_query) {
-                    $query->where('name', 'like', "%$search_query%");
-                })
-                ->with('type', 'type.category', 'quality', 'motorcycle')
+            $words = explode(' ', $search_query); // Divise la recherche en mots
+
+            $parts = MotorcyclePart::where(function ($query) use ($words) {
+                foreach ($words as $word) {
+                    $query->orWhere('name', 'like', "%$word%")
+                        ->orWhere('description', 'like', "%$word%");
+                }
+            })->orWhereHas('motorcycle', function ($query) use ($words) {
+                foreach ($words as $word) {
+                    $query->orWhere('name', 'like', "%$word%");
+                }
+            })->with('type', 'type.category', 'quality', 'motorcycle')
                 ->get();
 
             dd($parts->toArray());
