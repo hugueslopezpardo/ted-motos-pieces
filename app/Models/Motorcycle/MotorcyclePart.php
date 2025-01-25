@@ -72,7 +72,7 @@ class MotorcyclePart extends Model
      */
     public static function totalValue(): int
     {
-        return MotorcyclePart::sum('price')->where('is_sold', false);
+        return MotorcyclePart::where('is_sold_out', false)->sum('price');
     }
 
     /**
