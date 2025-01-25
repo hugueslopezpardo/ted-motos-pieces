@@ -43,19 +43,19 @@ class SearchController extends Controller
         if ($search_query) {
             $search_query = trim(preg_replace('/\s+/', ' ', $search_query));
 
-            // Recherche des pièces correspondantes au nom
+            // Recherche des pièces dont le nom correspond
             $parts = MotorcyclePart::where('name', 'like', '%' . $search_query . '%')
                 ->with('type', 'type.category', 'quality')
                 ->get();
 
-            // Recherche des motos correspondantes au nom
+            // Recherche des motos dont le nom correspond
             $motorcycles = Motorcycle::where('name', 'like', '%' . $search_query . '%')
-                ->with('parts.type', 'parts.type.category', 'parts.quality') // Précharge les parties des motos avec leur type et qualité
+                ->with('parts.type', 'parts.type.category', 'parts.quality') // Précharge les pièces de chaque moto
                 ->get();
 
-            // Fusionner les pièces de motos dans la recherche
+            // Fusionner les pièces de motos associées dans la recherche
             $motorcycleParts = $motorcycles->flatMap(function ($motorcycle) {
-                return $motorcycle->parts; // Extraire toutes les pièces de chaque moto
+                return $motorcycle->parts; // Récupère toutes les pièces de la moto
             });
 
             // Ajouter ces pièces à la collection des pièces
