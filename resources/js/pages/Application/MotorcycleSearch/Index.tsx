@@ -14,6 +14,7 @@ const MotorcyclePartPage = ({ auth }: PageProps<{ motorcycleParts: any, categori
 
     const [motorcycleParts, setMotorcycleParts] = useState(props.motorcycleParts);
 
+    console.log(motorcycleParts);
 
     return (
         <ApplicationLayout auth={auth} title={"Pièces"}>
