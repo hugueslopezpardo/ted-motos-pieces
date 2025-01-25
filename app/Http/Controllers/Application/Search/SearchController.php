@@ -88,6 +88,8 @@ class SearchController extends Controller
                 ->with('parts.type', 'parts.type.category', 'parts.quality') // Précharge les pièces de chaque moto
                 ->get();
 
+            dd($motorcycles);
+
             // Fusionner les pièces de motos associées dans la recherche
             $motorcycleParts = $motorcycles->flatMap(function ($motorcycle) {
                 return $motorcycle->parts; // Récupère toutes les pièces de la moto
