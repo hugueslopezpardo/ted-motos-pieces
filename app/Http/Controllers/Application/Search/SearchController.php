@@ -41,7 +41,10 @@ class SearchController extends Controller
             // Rechercher les pièces correspondant à la recherche
             $parts = MotorcyclePart::where('name', 'like', "%$search_query%")
                 ->orWhere('description', 'like', "%$search_query%")
-                ->with('type', 'type.category', 'quality')
+                ->orWhereHas('motorcycle', function ($query) use ($search_query) {
+                    $query->where('name', 'like', "%$search_query%");
+                })
+                ->with('type', 'type.category', 'quality', 'motorcycle')
                 ->get();
 
             dd($parts->toArray());
