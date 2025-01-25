@@ -20,6 +20,8 @@ use App\Http\Controllers\Application\Profile\ProfileController;
 use App\Http\Controllers\Application\Welcome\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
+// Routes
+
 Route::get('/', [WelcomeController::class, 'index'])
     ->name('welcome.index');
 
