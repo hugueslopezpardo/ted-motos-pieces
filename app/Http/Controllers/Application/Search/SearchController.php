@@ -43,7 +43,7 @@ class SearchController extends Controller
             $part->image = $part->getFullImagesPathAttribute();
         });
 
-        dd($parts);
+        dd($parts->toArray());
 
         return Inertia::render('Application/MotorcyclePartSearch/Index', [
             'motorcycleParts' => $parts,
