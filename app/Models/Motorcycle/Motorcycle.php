@@ -33,6 +33,7 @@ class Motorcycle extends Model
         'image_path',         // The file path to the motorcycle's image
         'is_on_sale',         // Indicates if the motorcycle is currently for sale
         'is_archived',        // Indicates if the motorcycle is archived
+        'is_accessoires',     // Indicates if the motorcycle is an accessory
         'motorcycle_brand_id', // The foreign key for the motorcycle's brand
     ];
 
