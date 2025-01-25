@@ -44,7 +44,7 @@ class SearchController extends Controller
                 ->with('type', 'type.category', 'quality')
                 ->get();
 
-            dd($parts);
+            dd($parts->toArray());
 
         } else {
             // Si aucune recherche, récupérer toutes les pièces
