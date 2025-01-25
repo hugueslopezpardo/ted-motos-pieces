@@ -36,6 +36,12 @@ class Order extends Model
         'order_status_id' // Foreign key for the order status
     ];
 
+
+    public static function totalSales(): int
+    {
+        return Order::sum('total');
+    }
+
     /**
      * Get the user that owns the order.
      *

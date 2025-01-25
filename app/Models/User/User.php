@@ -59,7 +59,6 @@ class User extends Authenticatable implements FilamentUser
         'is_blocked' => 'boolean',
     ];
 
-
     /**
      * Get the user's carts.
      *
