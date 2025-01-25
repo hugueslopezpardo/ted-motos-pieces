@@ -478,7 +478,6 @@ export default function ApplicationHeader({ auth } : PageProps) {
                                     <div className="grid w-full grid-cols-1 sm:max-w-xs">
                                         <input
                                             name="search"
-                                            type="search"
                                             placeholder="Rechercher un produit"
                                             aria-label="Search"
                                             className="col-start-1 row-start-1 block w-full rounded-md py-1.5 pl-10 pr-3 border-2 border-gray-200 text-base outline-none placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:placeholder:text-gray-400 sm:text-sm/6"
