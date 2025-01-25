@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use GeoSot\FilamentEnvEditor\FilamentEnvEditorPlugin;
+use Okeonline\FilamentArchivable\FilamentArchivablePlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -36,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
                     ->authorize(
                         fn () => auth()->user()->isAdmin()
                     ),
+                FilamentArchivablePlugin::make()
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

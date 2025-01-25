@@ -4,11 +4,16 @@ namespace App\Filament\Resources\Motorcycle;
 
 use App\Filament\Resources\Motorcycle\MotorcyclePartResource\Pages;
 use App\Models\Motorcycle\MotorcyclePart;
+
+use Okeonline\FilamentArchivable\Tables\Actions\ArchiveAction;
+use Okeonline\FilamentArchivable\Tables\Actions\UnArchiveAction;
+
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Okeonline\FilamentArchivable\Tables\Filters\ArchivedFilter;
 
 /**
  * Represents the resource for managing motorcycle parts.
@@ -161,10 +166,12 @@ class MotorcyclePartResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                // Define any filters if needed
+                ArchivedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                ArchiveAction::make(),
+                UnArchiveAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
