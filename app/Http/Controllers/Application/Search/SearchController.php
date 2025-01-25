@@ -39,29 +39,20 @@ class SearchController extends Controller
         // Si une recherche est effectuée
         if ($search_query) {
 
-            $words = array_filter(explode(' ', $search_query)); // Divise la recherche en mots
+            $words = explode(' ', $search_query); // Divise la recherche en mots
 
-            // Chercher les motos correspondantes
-            $motos = Motorcycle::where(function ($query) use ($words) {
+            $parts = MotorcyclePart::where(function ($query) use ($words) {
                 foreach ($words as $word) {
-                    $query->orWhere('name', 'like', "%$word%"); // Vérifie les mots-clés dans le nom des motos
+                    $query->orWhere('name', 'like', "%$word%")
+                        ->orWhere('description', 'like', "%$word%");
                 }
-            })->pluck('id'); // Récupère les IDs des motos trouvées
-
-            $parts = MotorcyclePart::query()
-                ->when($motos->isNotEmpty(), function ($query) use ($motos) {
-                    // Si des motos sont trouvées, ne retourner que leurs pièces
-                    $query->whereIn('motorcycle_id', $motos);
-                }, function ($query) use ($words) {
-                    // Sinon, effectuer une recherche sur les pièces uniquement
-                    $query->where(function ($subQuery) use ($words) {
-                        foreach ($words as $word) {
-                            $subQuery->orWhere('name', 'like', "%$word%")
-                                ->orWhere('description', 'like', "%$word%");
-                        }
-                    });
-                })
-                ->with('type', 'type.category', 'quality', 'motorcycle')
+            })->orWhereHas('motorcycle', function ($query) use ($words) {
+                $query->where(function ($subQuery) use ($words) {
+                    foreach ($words as $word) {
+                        $subQuery->orWhere('name', 'like', "%$word%");
+                    }
+                });
+            })->with('type', 'type.category', 'quality', 'motorcycle')
                 ->get();
 
         } else {
