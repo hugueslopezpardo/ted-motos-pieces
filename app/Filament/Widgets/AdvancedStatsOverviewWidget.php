@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Motorcycle\MotorcyclePart;
 use App\Models\Order\Order;
 use App\Models\User\User;
 use EightyNine\FilamentAdvancedWidget\AdvancedStatsOverviewWidget as BaseWidget;
@@ -20,8 +21,10 @@ class AdvancedStatsOverviewWidget extends BaseWidget
                 ->chartColor('success')
                 ->descriptionIcon('heroicon-o-chevron-up', 'before')
                 ->descriptionColor('success'),
-            Stat::make('Montant total des ventes', Order::totalSales() . ' €')->icon('heroicon-o-chat-bubble-left-ellipsis')
-                ->chartColor('success')
+            Stat::make('Montant total des ventes', number_format(Order::totalSales(), 2, ',', ' ') . ' €')->icon('heroicon-o-chat-bubble-left-ellipsis')
+                ->chartColor('success'),
+             Stat::make('Valeur du stock', number_format(MotorcyclePart::totalValue(), 2, ',', ' ') . ' €')->icon('heroicon-o-chat-bubble-left-ellipsis')
+                 ->chartColor('success')
         ];
     }
 }

@@ -66,6 +66,16 @@ class MotorcyclePart extends Model
     ];
 
     /**
+     * Get the total value of all motorcycle parts.
+     *
+     * @return int - The total value of all motorcycle parts.
+     */
+    public static function totalValue(): int
+    {
+        return MotorcyclePart::sum('price');
+    }
+
+    /**
      * Get the motorcycle that owns the part.
      *
      * @return BelongsTo - The motorcycle that owns this part.
