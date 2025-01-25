@@ -71,7 +71,7 @@ class InvoiceController extends Controller
         // Get the delivery rate
         $delivery_price = $order->delivery_price;
 
-        dd($order->items->toArray());
+        dd('Orders : ', $order->toArray(), 'Details : ', $detail->toArray());
 
         foreach ($order->items as $item) {
             // Get The iD of the part
