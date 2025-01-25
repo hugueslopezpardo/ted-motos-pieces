@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Application\Search;
 
 use App\Http\Controllers\Controller;
+use App\Models\Motorcycle\Motorcycle;
 use App\Models\Motorcycle\MotorcyclePart;
 use App\Models\Motorcycle\MotorcyclePartCategory;
 use App\Models\Motorcycle\MotorcyclePartType;
@@ -37,6 +38,19 @@ class SearchController extends Controller
             $parts = MotorcyclePart::where('name', 'like', '%' . $search_query . '%')
                 ->with('type', 'type.category', 'quality')
                 ->get();
+
+
+            $motorcycle = Motorcycle::where('name', 'like', '%' . $search_query . '%')
+                ->with('type', 'type.category', 'quality')
+                ->get();
+
+            // Get the parts of the motorcycle
+            $motorcycle->map(function ($motorcycle) {
+                $motorcycle->parts = $motorcycle->parts()->with('type', 'type.category', 'quality')->get();
+            });
+
+            // Combine the two collections
+            $parts = $parts->concat($motorcycle->pluck('parts')->flatten());
         } else {
             $parts = MotorcyclePart::all();
         }
