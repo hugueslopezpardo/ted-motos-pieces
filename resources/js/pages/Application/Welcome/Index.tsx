@@ -110,7 +110,7 @@ const WelcomePage = ({auth, trending}: PageProps<{ trending: any[] }>) => {
                                     <img
                                         alt="Fond d'écran"
                                         src="/assets/images/pages/welcome/welcome-hero.png"
-                                        className="h-full w-full object-fill"
+                                        className="h-full w-full object-cover object-center"
                                     />
                                 </div>
                                 <div className="absolute inset-0 bg-gray-900 opacity-50"/>
