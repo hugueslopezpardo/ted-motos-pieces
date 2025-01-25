@@ -33,6 +33,7 @@ class SearchController extends Controller
         if ($search_query) {
             $search_query = trim(preg_replace('/\s+/', ' ', $search_query));
             $parts = MotorcyclePart::where('name', 'like', '%' . $search_query . '%')
+                ->with('type', 'type.category', 'quality')
                 ->get();
         } else {
             $parts = MotorcyclePart::all();
