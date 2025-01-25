@@ -95,9 +95,6 @@ class MotorcycleResource extends Resource
                 Tables\Columns\IconColumn::make('is_on_sale')
                     ->label('En vente')
                     ->boolean(),
-                Tables\Columns\IconColumn::make('is_archived')
-                    ->label('Archivé')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Date de création')
                     ->dateTime()
