@@ -63,7 +63,6 @@ const MotorcyclePartPage = ({ auth }: PageProps<{ motorcycleParts: any, categori
     // Handle filter option for category, type, or quality
     const handleFilterOption = (event: React.ChangeEvent<HTMLInputElement>, filterType: 'category' | 'type' | 'quality') => {
         const { value, checked } = event.target;
-
         if (filterType === 'category') {
             setCategoryFilters((prevFilters) => {
                 if (checked) {

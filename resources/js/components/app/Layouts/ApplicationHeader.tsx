@@ -1,7 +1,7 @@
 'use client';
 
 import {PageProps} from "@/types";
-import {Fragment, useState} from "react";
+import {FormEventHandler, Fragment, useState} from "react";
 import {
     Dialog,
     DialogBackdrop,
@@ -18,10 +18,10 @@ import {
 } from '@headlessui/react'
 import { Bars3Icon, ShoppingBagIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import {Link, useForm, usePage} from "@inertiajs/react";
-import {Badge} from "@/components/ui/badge";
 import {Text} from "@radix-ui/themes";
-import {SearchIcon} from "lucide-react";
-
+import {MagnifyingGlassIcon} from "@radix-ui/react-icons";
+import {Button} from "@/components/ui/button";
+import {ArrowRight} from "lucide-react";
 
 function classNames(...classes: (string | boolean | null | undefined)[]) {
     return classes.filter(Boolean).join(' ')
@@ -178,7 +178,24 @@ export default function ApplicationHeader({ auth } : PageProps) {
     { /* @ts-ignore */ }
     const nb_products = usePage().props.auth.nb_products;
 
-    console.log(nb_products);
+    /**
+     * Search form
+     */
+    const { data, setData, post, processing, errors } = useForm({
+        search_query: ''
+    });
+
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+        post(route('search.index'), {
+            onSuccess: () => {
+
+            },
+            onError: () => {
+
+            }
+        });
+    }
 
     return (
         <>
@@ -211,7 +228,7 @@ export default function ApplicationHeader({ auth } : PageProps) {
             </div>
 
             {/* Main navbar */}
-            <div className="bg-whitez-50">
+            <div className="bg-white z-50 ">
                 {/* Mobile menu */}
                 <Dialog open={open} onClose={setOpen} className="relative z-40 lg:hidden">
                     <DialogBackdrop
@@ -323,17 +340,15 @@ export default function ApplicationHeader({ auth } : PageProps) {
                                     ))}
                                 </TabPanels>
                             </TabGroup>
-
-
                         </DialogPanel>
                     </div>
                 </Dialog>
 
-                <header className="relative bg-white z-50">
+                <header className="relative z-50">
                     <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="border-b border-gray-200">
                             <div className="flex h-16 items-center justify-between">
-                                <div className="flex flex-1 items-center lg:hidden">
+                                <div className="lg:hidden ">
                                     <button
                                         type="button"
                                         onClick={() => setOpen(true)}
@@ -457,29 +472,26 @@ export default function ApplicationHeader({ auth } : PageProps) {
                                     </div>
                                 </PopoverGroup>
 
-                                {/* Logo */}
-                                <Link href="#" className="flex">
-                                    <span className="sr-only">
-                                        Ted Motos Pièces
-                                    </span>
-                                    <img
-                                        alt="Logo de l'entreprise"
-                                        src="/assets/images/shared/logos/logo-transparent.png"
-                                        className="h-20 w-auto"
-                                    />
-                                </Link>
 
                                 <div className="flex flex-1 items-center justify-end">
-
-                                    { /* Search
-                                    <Link href={route('profile.index')} className="p-2 text-gray-400 hover:text-gray-500 lg:ml-4 hover:text-red-700">
-                                            <span className="sr-only">
-                                                Mon compte
-                                            </span>
-                                            <SearchIcon aria-hidden="true" className="h-6 w-6"/>
-                                    </Link>
-                                    */ }
-
+                                    {/* Search */}
+                                    <div className="grid w-full grid-cols-1 sm:max-w-xs">
+                                        <input
+                                            name="search"
+                                            type="search"
+                                            placeholder="Rechercher un produit"
+                                            aria-label="Search"
+                                            className="col-start-1 row-start-1 block w-full rounded-md py-1.5 pl-10 pr-3 border-2 border-gray-200 text-base outline-none placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:placeholder:text-gray-400 sm:text-sm/6"
+                                            onChange={(e) => setData('search_query', e.target.value)}
+                                        />
+                                        <MagnifyingGlassIcon
+                                            aria-hidden="true"
+                                            className="pointer-events-none col-start-1 row-start-1 ml-3 size-5 self-center text-gray-400"
+                                        />
+                                    </div>
+                                    <Button onClick={submit} className="ml-4">
+                                        Rechercher <ArrowRight className={'ml-2'} size={16} />
+                                    </Button>
 
                                     {/* Account */}
                                     <Link href={route('profile.index')}
@@ -505,6 +517,7 @@ export default function ApplicationHeader({ auth } : PageProps) {
                                             </span>
                                         </Link>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

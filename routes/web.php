@@ -17,6 +17,7 @@ use App\Http\Controllers\Application\Policy\RefundPolicyController;
 use App\Http\Controllers\Application\Policy\SecurePayementController;
 use App\Http\Controllers\Application\Policy\TermsOfServiceController;
 use App\Http\Controllers\Application\Profile\ProfileController;
+use App\Http\Controllers\Application\Search\SearchController;
 use App\Http\Controllers\Application\Welcome\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +64,10 @@ Route::get('/legal-notice', [LegalNoticeController::class, 'index'])
     ->name('legal-notice.index');
 Route::get('/delivery', [DeliveryPolicyController::class, 'index'])
     ->name('delivery.index');
+
+
+Route::post('/search', [SearchController::class, 'index'])
+    ->name('search.index');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 

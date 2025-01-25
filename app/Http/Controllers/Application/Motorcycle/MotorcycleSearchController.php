@@ -67,7 +67,6 @@ class MotorcycleSearchController extends Controller
             'categories' => MotorcyclePartCategory::all(),
             'types' => MotorcyclePartType::all(),
         ]);
-
     }
 
     /**

@@ -117,7 +117,18 @@ const WelcomePage = ({auth, trending}: PageProps<{ trending: any[] }>) => {
                             </div>
                             <div className="h-48 w-full bg-white"/>
                         </div>
-                        <div className="relative py-32">
+                        <div className="relative flex flex-col justify-center items-center pb-32">
+                            {/* Logo */}
+                            <Link href="#" className="flex">
+                                    <span className="sr-only">
+                                        Ted Motos Pièces
+                                    </span>
+                                <img
+                                    alt="Logo de l'entreprise"
+                                    src="/assets/images/shared/logos/logo-transparent.png"
+                                    className="h-32 md:h-52 pb-8 w-auto"
+                                />
+                            </Link>
                             <h1 className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-8xl space-y-4">
                                 <div>
                                     Vente moto
