@@ -39,11 +39,11 @@ const navigation = {
                     description: 'Découvrez notre sélection de motos',
                 },
                 {
-                    name: 'Pièces détachées',
-                    href: route('motorcycles.search'),
+                    name: 'Accessoires',
+                    href: route('motorcycles.accessories'),
                     imageSrc: 'https://images.unsplash.com/photo-1558981396-5fcf84bdf14d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fG1vdG9yYmlrZSUyMHBhcnRzfGVufDB8fDB8fHww',
-                    imageAlt: 'Découvrez nos pièces détachées',
-                    description: 'Découvrez nos pièces détachées',
+                    imageAlt: 'Découvrez tous nos accessoires',
+                    description: 'Découvrez tous nos accessoires',
                 },
             ],
             sections: [
