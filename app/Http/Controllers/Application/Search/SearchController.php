@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Inertia\Inertia;
+use Inertia\Response;
 
 /**
  * Class SearchController
@@ -19,7 +20,8 @@ class SearchController extends Controller
 {
     /**
      * Display the search page.
-     * @return \Inertia\Response
+     * @param Request $request - The request object.
+     * @return Response
      */
     public function index(Request $request): \Inertia\Response
     {
@@ -27,7 +29,6 @@ class SearchController extends Controller
             'search_query' => 'nullable|string|max:255'
         ]);
 
-        // Récupérer la recherche, la nettoyer et l'optimiser
         $search_query = $validated['search_query'] ?? null;
 
         if ($search_query) {

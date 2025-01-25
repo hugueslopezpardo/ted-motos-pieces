@@ -14,7 +14,6 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-
         $trending = Motorcycle::with('brand')
             ->where('is_on_sale', true)
             ->orderBy('created_at', 'desc')->take(3)->get();
