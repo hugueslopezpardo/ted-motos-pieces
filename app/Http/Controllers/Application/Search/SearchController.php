@@ -39,17 +39,52 @@ class SearchController extends Controller
         $parts = collect();
         $motorcycles = collect();
 
+        // Fonction pour enlever les accents et convertir en minuscules
+        $normalize = function($string) {
+            // Supprimer les accents et convertir en minuscules
+            return strtolower(
+                preg_replace(
+                    '/[áàâãäåæ]/u', 'a',
+                    preg_replace(
+                        '/[éèêë]/u', 'e',
+                        preg_replace(
+                            '/[íìîï]/u', 'i',
+                            preg_replace(
+                                '/[óòôõö]/u', 'o',
+                                preg_replace(
+                                    '/[úùûü]/u', 'u',
+                                    preg_replace(
+                                        '/[ç]/u', 'c',
+                                        preg_replace(
+                                            '/[ñ]/u', 'n',
+                                            preg_replace(
+                                                '/[ýÿ]/u', 'y',
+                                                $string
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        };
+
         // Si une recherche est effectuée
         if ($search_query) {
             $search_query = trim(preg_replace('/\s+/', ' ', $search_query));
 
-            // Recherche des pièces dont le nom correspond
-            $parts = MotorcyclePart::where('name', 'like', '%' . $search_query . '%')
+            // Normaliser la requête de recherche (enlever les accents et mettre en minuscules)
+            $normalizedSearchQuery = $normalize($search_query);
+
+            // Recherche des pièces dont le nom correspond (sans accents et en minuscules)
+            $parts = MotorcyclePart::whereRaw("LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(name, 'á', 'a'), 'à', 'a'), 'é', 'e'), 'è', 'e'), 'ó', 'o'), 'ç', 'c')) LIKE ?", ["%$normalizedSearchQuery%"])
                 ->with('type', 'type.category', 'quality')
                 ->get();
 
-            // Recherche des motos dont le nom correspond
-            $motorcycles = Motorcycle::where('name', 'like', '%' . $search_query . '%')
+            // Recherche des motos dont le nom correspond (sans accents et en minuscules)
+            $motorcycles = Motorcycle::whereRaw("LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(name, 'á', 'a'), 'à', 'a'), 'é', 'e'), 'è', 'e'), 'ó', 'o'), 'ç', 'c')) LIKE ?", ["%$normalizedSearchQuery%"])
                 ->with('parts.type', 'parts.type.category', 'parts.quality') // Précharge les pièces de chaque moto
                 ->get();
 
