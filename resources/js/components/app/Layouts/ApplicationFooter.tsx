@@ -62,7 +62,7 @@ export default function ApplicationFooter() {
                     </div>
                     <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24 flex justify-between items-center">
                         <p className="text-xs leading-5 text-gray-400">&copy;
-                            Tout droits réservés. Ted Motos &amp; Pièces. {new Date().getFullYear()} & HLP.
+                            Tout droits réservés. Ted Motos Pièces. {new Date().getFullYear()} & HLP.
                         </p>
                         <div className="flex text-left md:text-center flex-col md:flex-row space-x-0 md:space-x-6">
                             {navigation.legal.map((item) => (
