@@ -41,7 +41,7 @@ class SearchController extends Controller
 
 
             $motorcycle = Motorcycle::where('name', 'like', '%' . $search_query . '%')
-                ->with('type', 'type.category', 'quality')
+                ->with('parts')
                 ->get();
 
             // Get the parts of the motorcycle
