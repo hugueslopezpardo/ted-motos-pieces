@@ -203,7 +203,7 @@ export default function ApplicationFooter() {
                                 className="h-24"
                             />
                             <p className="text-sm leading-6 text-gray-300">
-                                Une entreprise familiale spécialisée dans la vente de motos et de pièces détachées
+                                Une entreprise familiale spécialisée dans la vente de pièces détachées
                                 toutes marques.
                             </p>
                             <div className="flex space-x-6">
@@ -217,15 +217,13 @@ export default function ApplicationFooter() {
                             </div>
                         </div>
                     </div>
-                    <div
-                        className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24 flex justify-between items-center">
+                    <div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24 flex justify-between items-center">
                         <p className="text-xs leading-5 text-gray-400">&copy;
                             Tout droits réservés. Ted Motos &amp; Pièces. {new Date().getFullYear()} & HLP.
                         </p>
-                        <div className="flex space-x-6">
+                        <div className="flex text-left md:text-center flex-col md:flex-row space-x-0 md:space-x-6">
                             {navigation.legal.map((item) => (
-                                <a key={item.name} href={item.href}
-                                   className="text-xs text-gray-400 hover:text-gray-300">
+                                <a key={item.name} href={item.href} className="text-xs text-gray-400 hover:text-gray-300">
                                     {item.name}
                                 </a>
                             ))}

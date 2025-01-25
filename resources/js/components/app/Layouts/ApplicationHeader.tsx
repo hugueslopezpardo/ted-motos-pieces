@@ -20,6 +20,7 @@ import { Bars3Icon, ShoppingBagIcon, UserIcon, XMarkIcon } from '@heroicons/reac
 import {Link, useForm, usePage} from "@inertiajs/react";
 import {Badge} from "@/components/ui/badge";
 import {Text} from "@radix-ui/themes";
+import {SearchIcon} from "lucide-react";
 
 
 function classNames(...classes: (string | boolean | null | undefined)[]) {
@@ -469,6 +470,17 @@ export default function ApplicationHeader({ auth } : PageProps) {
                                 </Link>
 
                                 <div className="flex flex-1 items-center justify-end">
+
+                                    { /* Search
+                                    <Link href={route('profile.index')} className="p-2 text-gray-400 hover:text-gray-500 lg:ml-4 hover:text-red-700">
+                                            <span className="sr-only">
+                                                Mon compte
+                                            </span>
+                                            <SearchIcon aria-hidden="true" className="h-6 w-6"/>
+                                    </Link>
+                                    */ }
+
+
                                     {/* Account */}
                                     <Link href={route('profile.index')}
                                           className="p-2 text-gray-400 hover:text-gray-500 lg:ml-4 hover:text-red-700">
