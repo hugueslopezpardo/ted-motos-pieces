@@ -31,41 +31,6 @@ const navigation = {
 
 
 export default function ApplicationFooter() {
-
-    const { toast } = useToast()
-
-    const [isAgreed, setIsAgreed] = useState(false);
-
-    const { data, setData, post, processing, errors, reset } = useForm({
-        first_name: '',
-        last_name: '',
-        email: '',
-        message: '',
-        is_agreed: isAgreed,
-    });
-
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
-        post(route('contact.store'), {
-            onSuccess: () => {
-                reset('first_name', 'last_name', 'email', 'message')
-                toast({
-                    title: 'Message envoyé',
-                    description: 'Votre message a bien été envoyé, nous vous répondrons dans les plus brefs délais.',
-                    duration: 3000,
-                });
-            },
-            onError: () => {
-                toast({
-                    title: 'Erreur',
-                    description: 'Une erreur s\'est produite lors de l\'envoi de votre message, veuillez réessayer.',
-                    duration: 3000,
-                    variant: 'destructive',
-                });
-            }
-        });
-    };
-
     return (
         <>
             <footer aria-labelledby="footer-heading" className="bg-gray-900">
