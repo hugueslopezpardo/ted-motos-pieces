@@ -62,7 +62,7 @@ class MotorcycleSearchController extends Controller
             $part->image = $part->getFullImagesPathAttribute();
         });
 
-        return Inertia::render('Application/MotorcyclePartSearch/Index', [
+        return Inertia::render('Application/MotorcycleSearch/Index', [
             'motorcycleParts' => $parts,
             'categories' => MotorcyclePartCategory::all(),
             'types' => MotorcyclePartType::all(),
