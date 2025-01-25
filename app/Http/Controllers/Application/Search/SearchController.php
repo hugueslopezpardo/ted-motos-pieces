@@ -38,7 +38,7 @@ class SearchController extends Controller
 
         // Si une recherche est effectuée
         if ($search_query) {
-            // Rechercher les pièces correspondant à la recherche
+
             $words = explode(' ', $search_query); // Divise la recherche en mots
 
             $parts = MotorcyclePart::where(function ($query) use ($words) {
@@ -47,9 +47,11 @@ class SearchController extends Controller
                         ->orWhere('description', 'like', "%$word%");
                 }
             })->orWhereHas('motorcycle', function ($query) use ($words) {
-                foreach ($words as $word) {
-                    $query->orWhere('name', 'like', "%$word%");
-                }
+                $query->where(function ($subQuery) use ($words) {
+                    foreach ($words as $word) {
+                        $subQuery->orWhere('name', 'like', "%$word%");
+                    }
+                });
             })->with('type', 'type.category', 'quality', 'motorcycle')
                 ->get();
 
