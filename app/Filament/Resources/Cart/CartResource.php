@@ -41,7 +41,7 @@ class CartResource extends Resource
                     ->relationship('items')
                     ->schema([
                         Forms\Components\Select::make('motorcycle_part_id')
-                            ->relationship('part', 'name')
+                            ->relationship('part', 'id')
                             ->label('Pièce')
                             ->required(),
                     ])
@@ -63,9 +63,6 @@ class CartResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Client')
                     ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('items_count')
-                    ->label('Articles')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Date de création')

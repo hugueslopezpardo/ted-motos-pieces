@@ -7,6 +7,7 @@ use App\Models\Motorcycle\MotorcyclePart;
 use App\Models\Motorcycle\MotorcyclePartCategory;
 use App\Models\Motorcycle\MotorcyclePartType;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Inertia\Inertia;
@@ -51,4 +52,12 @@ class SearchController extends Controller
             'types' => MotorcyclePartType::all(),
         ]);
     }
+
+    public function redirect(Request $request): RedirectResponse
+    {
+
+
+        return redirect()->route('welcome.index');
+    }
+
 }

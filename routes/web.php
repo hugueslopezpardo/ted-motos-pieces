@@ -69,6 +69,9 @@ Route::get('/delivery', [DeliveryPolicyController::class, 'index'])
 Route::post('/search', [SearchController::class, 'index'])
     ->name('search.index');
 
+Route::get('/search', [SearchController::class, 'redirect'])
+    ->name('search.redirect');
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::prefix('cart')->group(function () {
