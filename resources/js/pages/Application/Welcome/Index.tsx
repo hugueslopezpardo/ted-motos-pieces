@@ -212,7 +212,7 @@ const WelcomePage = ({auth, trending}: PageProps<{ trending: any[] }>) => {
                                         </Link>
                                     </h3>
                                     <p aria-hidden="true" className="mt-1 text-sm text-white">
-                                        Voir toutes les pièces détachées
+                                        Voir tous les accessoires
                                     </p>
                                 </div>
                             </div>
