@@ -148,11 +148,6 @@ class MotorcyclePartResource extends Resource
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Actif')
                     ->boolean(),
-                Tables\Columns\IconColumn::make('is_heavy')
-                    ->label('Lourd')
-                    ->disabled()
-                    ->default(false)
-                    ->boolean(),
                 Tables\Columns\IconColumn::make('is_sold_out')
                     ->label('Vendu')
                     ->boolean(),
