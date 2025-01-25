@@ -44,6 +44,13 @@ class Cart extends Model
         'updated_at'  // Hide timestamps for external visibility
     ];
 
+
+    public static function getNbProducts(int $user_id): int
+    {
+        $cart = Cart::where('user_id', $user_id)->first();
+        return $cart ? $cart->items()->count() : 0;
+    }
+
     /**
      * Get the user that owns the cart.
      *

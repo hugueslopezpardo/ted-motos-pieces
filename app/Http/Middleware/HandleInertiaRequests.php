@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Cart\Cart;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -34,6 +35,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
                 'details' => $request->user() ? $request->user()->details()->first() : null,
+                'nb_products' => $request->user() ? Cart::getNbProducts($request->user()->id) : 0,
             ],
             'csrf_token' => csrf_token(),
         ];

@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Cart\Cart;
 use App\Models\Order\Order;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -57,6 +58,17 @@ class User extends Authenticatable implements FilamentUser
         'is_admin' => 'boolean',
         'is_blocked' => 'boolean',
     ];
+
+
+    /**
+     * Get the user's carts.
+     *
+     * @return HasMany - The user's carts.
+     */
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class);
+    }
 
     /**
      * Get the user's orders.

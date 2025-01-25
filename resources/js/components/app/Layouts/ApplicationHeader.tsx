@@ -17,7 +17,9 @@ import {
     TabPanels,
 } from '@headlessui/react'
 import { Bars3Icon, ShoppingBagIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import {Link, useForm} from "@inertiajs/react";
+import {Link, useForm, usePage} from "@inertiajs/react";
+import {Badge} from "@/components/ui/badge";
+import {Text} from "@radix-ui/themes";
 
 
 function classNames(...classes: (string | boolean | null | undefined)[]) {
@@ -171,6 +173,11 @@ const navigation = {
 export default function ApplicationHeader({ auth } : PageProps) {
 
     const [open, setOpen] = useState(false)
+
+    { /* @ts-ignore */ }
+    const nb_products = usePage().props.auth.nb_products;
+
+    console.log(nb_products);
 
     return (
         <>
@@ -473,11 +480,14 @@ export default function ApplicationHeader({ auth } : PageProps) {
 
                                     {/* Cart */}
                                     <div className="ml-4 flow-root lg:ml-6">
-                                        <Link href={route('cart.index')} className="group -m-2 flex items-center p-2">
+                                        <Link href={route('cart.index')} className="group -m-2 flex items-center space-x-1 p-2">
                                             <ShoppingBagIcon
                                                 aria-hidden="true"
                                                 className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-red-700"
                                             />
+                                            <Text className={'text-sm font-medium text-gray-400 group-hover:text-red-700'}>
+                                                {nb_products}
+                                            </Text>
                                             <span className="sr-only">
                                                 Panier
                                             </span>
