@@ -21,6 +21,8 @@ class UserDetailResource extends Resource
     protected static ?string $navigationGroup = 'Gestion des utilisateurs'; // Group under which this resource will be listed
     protected static ?string $navigationLabel = 'Utilisateurs'; // Label for the navigation
 
+    //
+
     public static function form(Form $form): Form
     {
         return $form
@@ -29,6 +31,10 @@ class UserDetailResource extends Resource
                     ->required()
                     ->disabled()
                     ->numeric(),
+                Forms\Components\TextInput::make('first_name')
+                    ->required(),
+                Forms\Components\TextInput::make('last_name')
+                    ->required(),
                 Forms\Components\TextInput::make('email')
                     ->required()
                     ->maxLength(255)
