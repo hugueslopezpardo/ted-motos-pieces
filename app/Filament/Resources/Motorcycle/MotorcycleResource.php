@@ -68,6 +68,7 @@ class MotorcycleResource extends Resource
                 Forms\Components\Toggle::make('is_accessoires')
                     ->label('Ensemble d\'accessoires pour moto')
                     ->required()
+                    ->disabled()
                     ->columnSpanFull(),
             ]);
     }
