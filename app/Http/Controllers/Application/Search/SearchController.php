@@ -53,8 +53,6 @@ class SearchController extends Controller
             })->with('type', 'type.category', 'quality', 'motorcycle')
                 ->get();
 
-            dd($parts->toArray());
-
         } else {
             // Si aucune recherche, récupérer toutes les pièces
             $parts = MotorcyclePart::with('type', 'type.category', 'quality')->get();
