@@ -29,33 +29,31 @@ class UserDetailResource extends Resource
                     ->required()
                     ->disabled()
                     ->numeric(),
+                Forms\Components\TextInput::make('email')
+                    ->required()
+                    ->maxLength(255)
+                    ->default('-'),
                 Forms\Components\TextInput::make('phone_number')
                     ->tel()
-                    ->disabled()
                     ->required()
                     ->maxLength(255)
                     ->default('-'),
                 Forms\Components\TextInput::make('location_region_id')
                     ->required()
-                    ->disabled()
                     ->numeric(),
                 Forms\Components\TextInput::make('location_department_id')
                     ->required()
-                    ->disabled()
                     ->numeric(),
                 Forms\Components\TextInput::make('postal_code')
                     ->required()
-                    ->disabled()
                     ->maxLength(255)
                     ->default('-'),
                 Forms\Components\TextInput::make('address')
                     ->required()
-                    ->disabled()
                     ->maxLength(255)
                     ->default('-'),
                 Forms\Components\TextInput::make('city')
                     ->required()
-                    ->disabled()
                     ->maxLength(255)
                     ->default('-'),
             ]);
