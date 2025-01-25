@@ -21,7 +21,8 @@ class MotorcycleController extends Controller
         $motorcyclesQuery = Motorcycle::where('is_on_sale', true)
             ->whereHas('parts', function ($query) {
                 $query->where('is_active', true)
-                    ->where('is_sold_out', false);
+                      ->where('is_sold_out', false)
+                      ->where('is_accessoires', false);
             });
 
         // Filter by continent, if provided
