@@ -3,9 +3,11 @@
 namespace App\Models\Motorcycle;
 
 use App\Models\Delivery\DeliveryService;
+use App\Models\Order\OrderItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use LaravelArchivable\Archivable;
 
 /**
@@ -28,6 +30,7 @@ class MotorcyclePart extends Model
      * @var array
      */
     protected $fillable = [
+        'id',                       // The unique identifier for the motorcycle part
         'name',                     // The name of the motorcycle part
         'description',              // A description of the motorcycle part
         'price',                    // The price of the motorcycle part
@@ -114,8 +117,6 @@ class MotorcyclePart extends Model
     {
         return $this->belongsTo(DeliveryService::class, 'delivery_service_id');
     }
-
-
 
     public function getFullImagesPathAttribute(): array
     {

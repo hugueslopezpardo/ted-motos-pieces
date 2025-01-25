@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Application\Invoice;
 
 use App\Http\Controllers\Controller;
+use App\Models\Motorcycle\MotorcyclePart;
 use App\Models\Order\Order;
 use App\Models\Order\OrderDetail;
+use App\Models\Order\OrderItem;
 use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Response;
@@ -71,17 +73,27 @@ class InvoiceController extends Controller
         // Get the delivery rate
         $delivery_price = $order->delivery_price;
 
-        dd($order->items->toArray());
+        // Get the order item
+        $order_items = OrderItem::where('order_id', $order_id)->get();
 
+        $motorcyclePartIds = $order_items->pluck('motorcycle_part_id');
+
+        $parts = MotorcyclePart::query()
+            ->withArchived()
+            ->whereIn('id', $motorcyclePartIds)
+            ->get();
+
+        $index = 0;
         foreach ($order->items as $item) {
             // Get The iD of the part
-            $name = "Réf: #" . $item->part->id . ' - ' . $item->part->motorcycle->name . ' - ' . $item->part->type->name . ' - ' . $item->part->name . ' - ' . $item->part->quality->name;
-            $price = $item->part->price;
+            $name = "Réf: #" . $parts[$index]->id . ' - ' . $parts[$index]->motorcycle->name . ' - ' . $parts[$index]->type->name . ' - ' . $parts[$index]->name . ' - ' . $parts[$index]->quality->name;
+            $price = $parts[$index]->price;
             $quantity = 1;
             $item = InvoiceItem::make($name)
                 ->pricePerUnit($price)
                 ->quantity($quantity);
             $items[] = $item;
+            $index++;
         }
 
         // Add the delivery rate to the total as a new item
