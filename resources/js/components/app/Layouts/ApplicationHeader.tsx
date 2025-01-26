@@ -474,7 +474,7 @@ export default function ApplicationHeader({ auth } : PageProps) {
 
 
                                 <div className="flex flex-1 items-center justify-end">
-                                    {/* Search */}
+                                    {/* Search
                                     <div className="grid w-full grid-cols-1 sm:max-w-xs">
                                         <input
                                             name="search"
@@ -493,6 +493,7 @@ export default function ApplicationHeader({ auth } : PageProps) {
                                     <Button onClick={submit} className="ml-4">
                                         Rechercher <ArrowRight className={'ml-2'} size={16} />
                                     </Button>
+                                    */}
 
                                     {/* Account */}
                                     <Link href={route('profile.index')}
