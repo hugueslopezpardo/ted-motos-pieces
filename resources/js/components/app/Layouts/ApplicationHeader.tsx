@@ -493,6 +493,7 @@ export default function ApplicationHeader({ auth } : PageProps) {
                                     <Button onClick={submit} className="ml-4">
                                         Rechercher <ArrowRight className={'ml-2'} size={16} />
                                     </Button>
+
                                     */}
 
                                     {/* Account */}
