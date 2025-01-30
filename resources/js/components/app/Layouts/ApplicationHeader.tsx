@@ -22,6 +22,7 @@ import {Text} from "@radix-ui/themes";
 import {MagnifyingGlassIcon} from "@radix-ui/react-icons";
 import {Button} from "@/components/ui/button";
 import {ArrowRight} from "lucide-react";
+import {toast, useToast} from "@/hooks/use-toast";
 
 function classNames(...classes: (string | boolean | null | undefined)[]) {
     return classes.filter(Boolean).join(' ')
@@ -185,14 +186,28 @@ export default function ApplicationHeader({ auth } : PageProps) {
         search_query: ''
     });
 
+    const { toast } = useToast();
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('search.index'), {
             onSuccess: () => {
-
+                toast({
+                    title: 'Recherche en cours',
+                    description: 'Veuillez patienter quelques instants...',
+                    variant: 'default',
+                    duration: 2000,
+                })
+                setData('search_query', '');
             },
             onError: () => {
-
+                toast({
+                    title: 'Erreur',
+                    description: 'Veuillez entrer un terme de recherche valide',
+                    variant: 'destructive',
+                    duration: 2000,
+                })
+                setData('search_query', '');
             }
         });
     }
@@ -474,7 +489,6 @@ export default function ApplicationHeader({ auth } : PageProps) {
 
 
                                 <div className="flex flex-1 items-center justify-end">
-                                    {/* Search
                                     <div className="grid w-full grid-cols-1 sm:max-w-xs">
                                         <input
                                             name="search"
@@ -483,18 +497,13 @@ export default function ApplicationHeader({ auth } : PageProps) {
                                             aria-label="Search"
                                             className="col-start-1 row-start-1 block w-full rounded-md py-1.5 pl-10 pr-3 border-2 border-gray-200 text-base outline-none placeholder:text-gray-400 focus:bg-white focus:text-gray-900 focus:placeholder:text-gray-400 sm:text-sm/6"
                                             onChange={(e) => setData('search_query', e.target.value)}
-                                            onSubmit={submit}
+                                            onKeyDown={(e) => e.key === 'Enter' && submit(e)}
                                         />
                                         <MagnifyingGlassIcon
                                             aria-hidden="true"
                                             className="pointer-events-none col-start-1 row-start-1 ml-3 size-5 self-center text-gray-400"
                                         />
                                     </div>
-                                    <Button onClick={submit} className="ml-4">
-                                        Rechercher <ArrowRight className={'ml-2'} size={16} />
-                                    </Button>
-
-                                    */}
 
                                     {/* Account */}
                                     <Link href={route('profile.index')}

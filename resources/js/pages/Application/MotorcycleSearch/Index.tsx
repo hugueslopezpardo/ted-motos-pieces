@@ -8,11 +8,11 @@ import {
 import { Link, usePage } from "@inertiajs/react";
 import {FunnelIcon, MinusIcon, PlusIcon} from "@heroicons/react/20/solid";
 
-const MotorcyclePartPage = ({ auth }: PageProps<{ motorcycleParts: any, categories: any, types: any }>) => {
+const MotorcyclePartPage = ({ auth }: PageProps<{ motorcycleParts: any}>) => {
 
     const { props }: any = usePage();
 
-    const [motorcycleParts, setMotorcycleParts] = useState(props.motorcycleParts);
+    console.log(props);
 
     return (
         <ApplicationLayout auth={auth} title={"Pièces"}>
@@ -25,15 +25,15 @@ const MotorcyclePartPage = ({ auth }: PageProps<{ motorcycleParts: any, categori
                     <section aria-labelledby="filter-heading" className="pb-24 pt-6">
                         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
                             {/* Motorcycle parts grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:col-span-3">
-                                {motorcycleParts.length === 0 && (
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:col-span-4">
+                                {props.motorcycleParts.length === 0 && (
                                     <div className="col-span-1 md:col-span-3 p-24 border border-dashed border-gray-200 rounded-md text-center">
                                         <p className="text-lg font-medium text-gray-900">
                                             Aucun produit trouvé
                                         </p>
                                     </div>
                                 )}
-                                {motorcycleParts.map((item: any, itemIdx: any) => (
+                                {props.motorcycleParts.map((item: any, itemIdx: any) => (
                                     <div key={itemIdx} className="group relative">
                                         <Link
                                             href={route('motorcycles.part.detail.index', {motorcycle_part_id: item.id})}>
@@ -51,9 +51,6 @@ const MotorcyclePartPage = ({ auth }: PageProps<{ motorcycleParts: any, categori
                                                         <span aria-hidden="true" className="absolute inset-0"/>
                                                         {item.name}
                                                     </h3>
-                                                    <p className="mt-1 text-sm text-gray-500">
-                                                        {item.type.name} - {item.quality.name}
-                                                    </p>
                                                 </div>
                                                 <p className="text-sm font-medium text-gray-900">
                                                     {item.price} €

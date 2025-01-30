@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Application\Search;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Application\Search\SearchRequest;
 use App\Models\Motorcycle\Motorcycle;
 use App\Models\Motorcycle\MotorcyclePart;
 use App\Models\Motorcycle\MotorcyclePartCategory;
@@ -25,54 +26,63 @@ class SearchController extends Controller
      * @param Request $request - The request object.
      * @return Response
      */
-    public function index(Request $request): \Inertia\Response
+    public function index(SearchRequest $request): \Inertia\Response
     {
-        // Validation de la requête
-        $validated = $request->validate([
-            'search_query' => 'nullable|string|max:255',
-        ]);
+        $search_query = $request->input('search_query');
 
-        // Récupérer la requête de recherche
-        $search_query = $validated['search_query'] ?? null;
-        $parts = [];
+        $motorcycles = Motorcycle::query()->where('is_on_sale', 'true')->with(['parts' => function ($query) use ($search_query) {
 
-        // Si une recherche est effectuée
-        if ($search_query) {
+            $query->where('is_sold_out', 0)
+                ->where('is_active', 1);
 
-            $words = explode(' ', $search_query); // Divise la recherche en mots
+            if ($search_query) {
+                $search_terms = explode(' ', strtolower($search_query));
 
-            $parts = MotorcyclePart::where(function ($query) use ($words) {
-                foreach ($words as $word) {
-                    $query->orWhere('name', 'like', "%$word%")
-                        ->orWhere('description', 'like', "%$word%");
-                }
-            })->orWhereHas('motorcycle', function ($query) use ($words) {
-                $query->where(function ($subQuery) use ($words) {
-                    foreach ($words as $word) {
-                        $subQuery->orWhere('name', 'like', "%$word%");
+                $query->where(function ($q) use ($search_terms) {
+                    foreach ($search_terms as $term) {
+                        $q->orWhereRaw('LOWER(name) LIKE ?', ["%$term%"]);
                     }
                 });
-            })->with('type', 'type.category', 'quality', 'motorcycle')
-                ->get();
+            }
+        }]);
 
-        } else {
-            // Si aucune recherche, récupérer toutes les pièces
-            $parts = MotorcyclePart::with('type', 'type.category', 'quality')->get();
+        if ($search_query) {
+            $search_terms = explode(' ', strtolower($search_query));
+
+            $motorcycles->where(function ($query) use ($search_terms) {
+                foreach ($search_terms as $term) {
+                    $query->orWhereRaw('LOWER(name) LIKE ?', ["%$term%"]);
+                }
+            });
         }
 
-        // Ajouter les images aux pièces
-        $parts->map(function ($part) {
-            $part->image = $part->getFullImagesPathAttribute();
-        });
+        $motorcycles = $motorcycles->get();
 
-        // Récupérer les catégories et types pour le filtrage
-        $categories = MotorcyclePartCategory::all();
-        $types = MotorcyclePartType::all();
+        if (count($search_terms) === 1) { // Vérifier si un seul mot
+            foreach ($motorcycles as $motorcycle) {
+                if ($motorcycle->parts->isEmpty()) {
+                    // Charger toutes les pièces de cette moto si aucune pièce trouvée
+                    $motorcycle->load('parts');
+                }
+            }
+        }
 
-        return Inertia::render('Application/MotorcyclePartSearch/Index', [
-            'motorcycleParts' => $parts,
-            'categories' => $categories,
-            'types' => $types,
+        foreach ($motorcycles as $motorcycle) {
+            foreach ($motorcycle->parts as $part) {
+                $part->image = $part->getFullImagesPathAttribute();
+            }
+        }
+
+        $parts = [];
+
+        foreach ($motorcycles as $motorcycle) {
+            $parts[] = $motorcycle->parts;
+        }
+
+        $parts = collect($parts)->flatten();
+
+        return Inertia::render('Application/MotorcycleSearch/Index', [
+            'motorcycleParts' => $parts->toArray(),
         ]);
     }
 
