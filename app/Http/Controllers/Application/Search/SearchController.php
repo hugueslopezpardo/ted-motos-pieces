@@ -58,7 +58,12 @@ class SearchController extends Controller
 
         $motorcycles = $motorcycles->get();
 
-        if (count($search_terms) === 1) { // Vérifier si un seul mot
+        // Check the number of motorcycles found
+        $count = $motorcycles->count();
+
+
+        // On compte le nombre de motos trouvées
+        if ($count > 0) {
             foreach ($motorcycles as $motorcycle) {
                 if ($motorcycle->parts->isEmpty()) {
                     // Charger toutes les pièces de cette moto si aucune pièce trouvée
@@ -67,15 +72,29 @@ class SearchController extends Controller
             }
         } else {
             // Récupérer toutes les pièces de chaque moto pouvant correspondre à la recherche
-            foreach ($motorcycles as $motorcycle) {
-                $motorcycle->load(['parts' => function ($query) use ($search_terms) {
-                    $query->where(function ($q) use ($search_terms) {
-                        foreach ($search_terms as $term) {
-                            $q->orWhereRaw('LOWER(name) LIKE ?', ["%$term%"]);
-                        }
-                    });
-                }]);
+            $parts = MotorcyclePart::query()->where('is_sold_out', 0)
+                ->where('is_active', 1)
+                ->where(function ($query) use ($search_query) {
+                    if ($search_query) {
+                        $search_terms = explode(' ', strtolower($search_query));
+
+                        $query->where(function ($q) use ($search_terms) {
+                            foreach ($search_terms as $term) {
+                                $q->orWhereRaw('LOWER(name) LIKE ?', ["%$term%"]);
+                            }
+                        });
+                    }
+                })->get();
+
+
+            foreach ($parts as $part) {
+                $part->image = $part->getFullImagesPathAttribute();
             }
+
+            return Inertia::render('Application/MotorcycleSearch/Index', [
+                'motorcycleParts' => $parts->toArray(),
+            ]);
+
         }
 
         foreach ($motorcycles as $motorcycle) {
