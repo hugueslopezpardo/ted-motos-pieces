@@ -65,6 +65,17 @@ class SearchController extends Controller
                     $motorcycle->load('parts');
                 }
             }
+        } else {
+            // Récupérer toutes les pièces de chaque moto pouvant correspondre à la recherche
+            foreach ($motorcycles as $motorcycle) {
+                $motorcycle->load(['parts' => function ($query) use ($search_terms) {
+                    $query->where(function ($q) use ($search_terms) {
+                        foreach ($search_terms as $term) {
+                            $q->orWhereRaw('LOWER(name) LIKE ?', ["%$term%"]);
+                        }
+                    });
+                }]);
+            }
         }
 
         foreach ($motorcycles as $motorcycle) {
