@@ -32,13 +32,11 @@ const ProfileOrder = ({ auth, orders }: PageProps<{ orders: any[] }>) => {
                                     className="space-y-5 sm:flex sm:items-baseline sm:justify-between sm:space-y-0 md:min-w-0 md:flex-1">
                                     <p className="text-sm font-medium text-gray-500">{''}</p>
                                     <div className="flex text-sm font-medium">
-                                        {/*
                                         <div className="ml-4 border-l border-gray-200 pl-4 sm:ml-6 sm:pl-6">
                                             <a href={route('invoice.invoice', order.id) } className="text-red-600 hover:text-red-500">
                                                 Voir la facture
                                             </a>
                                         </div>
-                                        */}
                                     </div>
                                 </div>
                             </div>
