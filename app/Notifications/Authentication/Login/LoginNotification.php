@@ -46,7 +46,7 @@ class LoginNotification extends Notification
             ->line('**Adresse IP :** ' . $this->ipAddress)
             ->line('**Date et heure :** ' . $this->loginTime)
             ->line('Si ce n\'était pas vous, nous vous recommandons de changer votre mot de passe immédiatement.')
-            ->salutation('Cordialement, L\'équipe de support');
+            ->salutation('Cordialement, TED MOTOS PIECES');
     }
 
     /**
