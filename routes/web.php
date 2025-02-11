@@ -22,6 +22,16 @@ use App\Http\Controllers\Application\Welcome\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 // Routes for the application
+use Vormkracht10\FilamentMails\Facades\FilamentMails;
+
+// Basic usage - uses default Filament panel path and name
+FilamentMails::routes();
+
+// Prefix routes with path and/or name
+FilamentMails::routes(
+    path: 'panel-path',
+    name: 'filament.panel'
+);
 
 Route::get('/', [WelcomeController::class, 'index'])
     ->name('welcome.index');
