@@ -20,6 +20,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use GeoSot\FilamentEnvEditor\FilamentEnvEditorPlugin;
 use Okeonline\FilamentArchivable\FilamentArchivablePlugin;
+use RickDBCN\FilamentEmail\FilamentEmail;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -34,11 +35,8 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Purple,
             ])
             ->plugins([
-                FilamentEnvEditorPlugin::make()
-                    ->authorize(
-                        fn () => auth()->user()->isAdmin()
-                    ),
-                FilamentArchivablePlugin::make()
+                FilamentArchivablePlugin::make(),
+                FilamentEmail::make(),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
