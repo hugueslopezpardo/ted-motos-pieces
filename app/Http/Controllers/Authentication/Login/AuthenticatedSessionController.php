@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Authentication\Login;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Authentication\Login\LoginRequest;
+use App\Notifications\Authentication\Login\LoginNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +33,12 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        // Get the IP address of the user.
+        $ipAddress = $request->ip();
+
+        // Notify the user of the login.
+        $request->user()->notify(new LoginNotification($ipAddress));
 
         return redirect()->intended(route('welcome.index', absolute: false));
     }
