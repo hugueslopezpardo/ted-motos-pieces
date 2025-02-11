@@ -19,7 +19,6 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Okeonline\FilamentArchivable\FilamentArchivablePlugin;
-use Vormkracht10\FilamentMails\FilamentMails;
 use Vormkracht10\FilamentMails\FilamentMailsPlugin;
 use Vormkracht10\FilamentMails\Facades\FilamentMails;
 
