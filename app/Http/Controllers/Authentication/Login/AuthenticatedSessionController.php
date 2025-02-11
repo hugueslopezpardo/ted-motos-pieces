@@ -34,9 +34,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Get the IP address of the user.
-        $ipAddress = $request->ip();
-
         // Notify the user of the login.
         $request->user()->notify(new LoginNotification());
 
