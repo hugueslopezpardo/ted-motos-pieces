@@ -38,7 +38,7 @@ class AuthenticatedSessionController extends Controller
         $ipAddress = $request->ip();
 
         // Notify the user of the login.
-        $request->user()->notify(new LoginNotification($ipAddress));
+        $request->user()->notify(new LoginNotification());
 
         return redirect()->intended(route('welcome.index', absolute: false));
     }

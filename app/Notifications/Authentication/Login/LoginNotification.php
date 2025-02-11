@@ -12,15 +12,13 @@ class LoginNotification extends Notification
 {
     use Queueable;
 
-    protected string $ipAddress;
     protected string $loginTime;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(string $ipAddress)
+    public function __construct()
     {
-        $this->ipAddress = $ipAddress;
         $this->loginTime = Carbon::now()->format('Y-m-d H:i:s');
     }
 
@@ -43,7 +41,6 @@ class LoginNotification extends Notification
             ->subject('Nouvelle connexion à votre compte')
             ->greeting('Bonjour ' . $notifiable->name . ',')
             ->line('Une connexion a été détectée sur votre compte.')
-            ->line('**Adresse IP :** ' . $this->ipAddress)
             ->line('**Date et heure :** ' . $this->loginTime)
             ->line('Si ce n\'était pas vous, nous vous recommandons de changer votre mot de passe immédiatement.')
             ->salutation('Cordialement, TED MOTOS PIECES');
