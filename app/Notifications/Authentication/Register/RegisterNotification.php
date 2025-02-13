@@ -42,7 +42,7 @@ class RegisterNotification extends Notification
             ->greeting('Bonjour ' . $this->name . ',')
             ->line('Nous sommes ravis de vous compter parmi les membres de la communauté Ted Motos Pièces.')
             ->line('Vous avez désormais accès à notre plateforme où vous pouvez découvrir nos pièces de moto de haute qualité et passer vos commandes en toute simplicité.')
-            ->action('Visitez notre site', url('https://www.tedmotospieces.fr'))
+            ->action('Visitez notre site', url('https://tedmotospieces.fr'))
             ->line('Si vous avez des questions, n\'hésitez pas à nous contacter. Nous sommes là pour vous aider.')
             ->line('À très bientôt sur Ted Motos Pièces !')
             ->salutation('Cordialement, L\'équipe Ted Motos Pièces');
